@@ -35,3 +35,5 @@ entity Priority : CodeList {
                     low    = 'L';
             };
 }
+
+@readonly entity ListOfRisks as projection on Risks { ID, title, owner };
