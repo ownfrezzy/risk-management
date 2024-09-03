@@ -10,7 +10,7 @@ sap.ui.define(['sap/fe/test/ListReport'], function(ListReport) {
         {
             appId: 'riskmanagement',
             componentId: 'RisksList',
-            contextPath: '/Risks'
+            entitySet: 'Risks'
         },
         CustomPageDefinitions
     );

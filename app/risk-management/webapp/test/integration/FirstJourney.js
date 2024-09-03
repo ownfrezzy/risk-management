@@ -17,9 +17,7 @@ sap.ui.define([
 
             opaTest("Navigate to ObjectPage", function (Given, When, Then) {
                 // Note: this test will fail if the ListReport page doesn't show any data
-                
                 When.onTheRisksList.onFilterBar().iExecuteSearch();
-                
                 Then.onTheRisksList.onTable().iCheckRows();
 
                 When.onTheRisksList.onTable().iPressRow(0);

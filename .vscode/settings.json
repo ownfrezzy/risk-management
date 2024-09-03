@@ -4,14 +4,6 @@
       "**/.reuse": true,
       "**/.vscode": true,
       "LICENSES": true
-    },
-    "sqltools.connections": [
-      {
-        "previewLimit": 50,
-        "driver": "SQLite",
-        "name": "sqlite",
-        "database": "db.sqlite"
-      }
-    ]
+    }
   }
   

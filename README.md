@@ -1,7 +1,7 @@
 # Welcome to the Learning Journey "Building side-by-side extensions on SAP BTP"
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/extension-suite-learning-journey)](https://api.reuse.software/info/github.com/SAP-samples/extension-suite-learning-journey)
 
-Welcome to this repository for the learning journey "Building side-by-side extensions on SAP BTP" published on [SAP Learning](https://learning.sap.com/learning-journey/build-side-by-side-extensions-on-sap-btp). We provide a starting template for the exercises as well as a dedicated branch for each exercise with its final solution.
+Welcome to this repository for the learning journey "Building side-by-side extensions on SAP BTP" published on [SAP Learning](https://learning.sap.com/learning-journey/building-side-by-side-extensions-on-sap-btp). We provide a starting template for the exercises as well as a dedicated branch for each exercise with its final solution.
 
 ## Requirements
 You can complete each of the exercises using your SAP BTP Free Tier account. In a SAP Classroom training you will use the provided systems by the trainer. In your "Full Stack Cloud Application" dev space of your SAP Business Application Studio, you can easily clone and run this code. All further requirements are exactly described in the learning journey.
@@ -33,7 +33,7 @@ git checkout <branch>
 To get support during the exercises, please [ask a question in our SAP BTP Learning Group](https://groups.community.sap.com/t5/sap-btp-learning/gh-p/SAP-BTP-Learning).
 
 ## Contributing
-If you have suggestions on how to improve the tutorial, you're welcome to provide your input open up a pull request.
+If you have suggestions on how to improve the tutorial, you're welcome to provide your input [here](https://github.com/SAP-samples/extension-suite-learning-journey/issues).
 
 If you wish to contribute code, offer fixes or improvements, please send a pull request. Due to legal reasons, contributors will be asked to accept a DCO when they create the first pull request to this project. This happens in an automated fashion during the submission process. SAP uses [the standard DCO text of the Linux Foundation](https://developercertificate.org/).
 

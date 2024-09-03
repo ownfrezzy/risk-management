@@ -10,7 +10,7 @@ sap.ui.define(['sap/fe/test/ObjectPage'], function(ObjectPage) {
         {
             appId: 'riskmanagement',
             componentId: 'RisksObjectPage',
-            contextPath: '/Risks'
+            entitySet: 'Risks'
         },
         CustomPageDefinitions
     );

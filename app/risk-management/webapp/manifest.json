@@ -1,5 +1,5 @@
 {
-  "_version": "1.59.0",
+  "_version": "1.49.0",
   "sap.app": {
     "id": "riskmanagement",
     "type": "application",
@@ -12,8 +12,8 @@
     "resources": "resources.json",
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
-      "version": "1.14.4",
-      "toolsId": "9caac6ef-d622-4329-b1f0-eb6de21498f8"
+      "version": "1.11.0",
+      "toolsId": "29df8de2-256c-4bf0-96f3-55514805bd05"
     },
     "dataSources": {
       "mainService": {
@@ -21,6 +21,7 @@
         "type": "OData",
         "settings": {
           "annotations": [],
+          "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
         }
       }
@@ -45,7 +46,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.127.1",
+      "minUI5Version": "1.118.0",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -68,6 +69,7 @@
         "dataSource": "mainService",
         "preload": true,
         "settings": {
+          "synchronizationMode": "None",
           "operationMode": "Server",
           "autoExpandSelect": true,
           "earlyRequests": true
@@ -102,19 +104,12 @@
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/Risks",
+              "entitySet": "Risks",
               "variantManagement": "Page",
               "navigation": {
                 "Risks": {
                   "detail": {
                     "route": "RisksObjectPage"
-                  }
-                }
-              },
-              "controlConfiguration": {
-                "@com.sap.vocabularies.UI.v1.LineItem": {
-                  "tableSettings": {
-                    "type": "ResponsiveTable"
                   }
                 }
               }
@@ -128,7 +123,7 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Risks"
+              "entitySet": "Risks"
             }
           }
         }
