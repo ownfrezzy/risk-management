@@ -1,8 +1,9 @@
+
 const cds = require('@sap/cds')
 
 module.exports = cds.service.impl(async function() {
 
-    const { Risks, BusinessPartners } = this.entities;
+    const { Risks, BusinessPartners, Items } = this.entities;
 
     this.after("READ", Risks, (data) => {
         const risks = Array.isArray(data) ? data : [data];
@@ -14,6 +15,7 @@ module.exports = cds.service.impl(async function() {
                 risk.criticality = 2;
             }
 
+            // set criticality for priority
             switch (risk.prio_code) {
                 case 'H':
                     risk.PrioCriticality = 1;
@@ -30,4 +32,31 @@ module.exports = cds.service.impl(async function() {
 
         })
     })
+
+    this.on('getItems', async (req) => {
+        console.log('HERE')
+        const { exactQuantity } = req.data;
+        const query = SELECT.from(Items).where({ quantity: exactQuantity });
+        const items = await cds.run(query);
+
+        return items;
+    })
+
+    this.on('createItem', async (req) => {
+        console.log('HERE')
+
+        const { title, descr, quantity } = req.data;
+
+        const newItem = {
+            title,
+            descr,
+            quantity,
+        };
+
+        const query = INSERT.into(Items).entries(newItem)
+
+        const result = await cds.run(query);
+
+        return result;
+    });
   });

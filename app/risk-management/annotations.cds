@@ -104,7 +104,13 @@ annotate service.Risks with @(
     ]
 );
 annotate service.Risks with {
-    prio @Common.Label : '{i18n>Priority}'
+    prio @(
+        Common.Label : '{i18n>Priority}',
+        Common.Text : {
+            $value : prio.descr,
+            ![@UI.TextArrangement] : #TextOnly
+        },
+    )
 };
 annotate service.Risks with @(
     UI.HeaderInfo : {
