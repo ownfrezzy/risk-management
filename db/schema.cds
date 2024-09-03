@@ -32,7 +32,7 @@ entity Priority : CodeList {
         key code : String enum {
                     high   = 'H';
                     medium = 'M';
-                    low    = 'L';
+                low    = 'L';
             };
 }
 
