@@ -8,6 +8,8 @@ service RiskService {
     entity Mitigations as projection on rm.Mitigations;
     annotate Mitigations with @odata.draft.enabled;
 
-    // BusinessPartner will be used later
-    //@readonly entity BusinessPartners as projection on rm.BusinessPartners;
+    entity Items as projection on rm.Items;
+
+    function getItems(exactQuantity: Integer) returns Array of Items;
+    action createItem(title: String, descr: String, quantity: Integer) returns Items;
 }
