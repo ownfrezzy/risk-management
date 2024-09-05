@@ -4,6 +4,8 @@ const cds = require('@sap/cds')
 module.exports = cds.service.impl(async function() {
 
     const { Risks, BusinessPartners, Items } = this.entities;
+    const BPsrv = await cds.connect.to("API_BUSINESS_PARTNER");
+
 
     this.after("READ", Risks, (data) => {
         const risks = Array.isArray(data) ? data : [data];
@@ -31,6 +33,47 @@ module.exports = cds.service.impl(async function() {
 
         })
     })
+
+    this.on("READ", Risks, async (req, next) => {
+        if (!req.query.SELECT.columns) return next();
+
+        const expandIndex = req.query.SELECT.columns.findIndex(
+            ({ expand, ref }) => expand && ref[0] === "bp"
+        );
+
+        if (expandIndex < 0) return next();
+
+        req.query.SELECT.columns.splice(expandIndex, 1);
+
+        if (!req.query.SELECT.columns.find((column) =>
+            column.ref.find((ref) => ref == "bp_BusinessPartner")
+        )
+        ) {
+            req.query.SELECT.columns.push({ ref: ["bp_BusinessPartner"] });
+        }
+
+        const risks = await next();
+
+        const asArray = x => Array.isArray(x) ? x : [x];
+
+        const bpIDs = asArray(risks).map(risk => risk.bp_BusinessPartner);
+        const busienssPartners = await BPsrv.transaction(req).send({
+            query: SELECT.from(this.entities.BusinessPartners).where({ BusinessPartner: bpIDs }),
+            headers: {
+                apikey: process.env.apikey,
+            }
+        });
+
+        const bpMap = {};
+        for (const businessPartner of busienssPartners)
+            bpMap[businessPartner.BusinessPartner] = businessPartner;
+
+        for (const note of asArray(risks)) {
+            note.bp = bpMap[note.bp_BusinessPartner];
+        }
+
+        return risks;
+    });
 
     this.on('getItems', async (req) => {
         const { quantity } = req.data;
@@ -75,4 +118,15 @@ module.exports = cds.service.impl(async function() {
         console.log(e.message || 'On error handler invoked')
         console.log('\x1b[36m%s\x1b[0m', 'Hayah', JSON.stringify(req.data))
     })
+
+    this.on("READ", BusinessPartners, async (req) => {
+        req.query.where("LastName <> '' and FirstName <> '' ");
+
+        return await BPsrv.transaction(req).send({
+            query: req.query,
+            headers: {
+                apikey: process.env.apikey,
+            },
+        });
+    });
   });

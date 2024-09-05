@@ -29,6 +29,11 @@ annotate service.Risks with @(
             Value : impact,
             Criticality : criticality,
         },
+        {
+            $Type : 'UI.DataFieldForAnnotation',
+            Target : 'bp/@Communication.Contact#contact1',
+            Label : '{i18n>BusinessPartner}',
+        },
     ]
 );
 annotate service.Risks with @(
@@ -104,13 +109,7 @@ annotate service.Risks with @(
     ]
 );
 annotate service.Risks with {
-    prio @(
-        Common.Label : '{i18n>Priority}',
-        Common.Text : {
-            $value : prio.descr,
-            ![@UI.TextArrangement] : #TextOnly
-        },
-    )
+    prio @Common.Label : '{i18n>Priority}'
 };
 annotate service.Risks with @(
     UI.HeaderInfo : {
@@ -152,6 +151,11 @@ annotate service.Risks with @(
                 Value : impact,
                 Label : '{i18n>Impact}',
                 Criticality : criticality,
+            },
+            {
+                $Type : 'UI.DataFieldForAnnotation',
+                Target : 'bp/@Communication.Contact#contact4',
+                Label : '{i18n>BusinessPartner}',
             },],
     }
 );
@@ -212,3 +216,40 @@ annotate service.Risks with {
             ![@UI.TextArrangement] : #TextOnly,
         }
 };
+annotate service.BusinessPartners with @(
+    Communication.Contact #contact : {
+        $Type : 'Communication.ContactType',
+        fn : FullName,
+    }
+);
+annotate service.BusinessPartners with @(
+    Communication.Contact #contact1 : {
+        $Type : 'Communication.ContactType',
+        fn : FullName,
+    }
+);
+annotate service.BusinessPartners with @(
+    Communication.Contact #contact2 : {
+        $Type : 'Communication.ContactType',
+        fn : FullName,
+    }
+);
+annotate service.BusinessPartners with @(
+    Communication.Contact #contact3 : {
+        $Type : 'Communication.ContactType',
+        fn : FullName,
+    }
+);
+
+annotate service.Risks with @(
+    Communication.Contact #contact : {
+        $Type : 'Communication.ContactType',
+        fn : bp_BusinessPartner,
+    }
+);
+annotate service.BusinessPartners with @(
+    Communication.Contact #contact4 : {
+        $Type : 'Communication.ContactType',
+        fn : FullName,
+    }
+);
