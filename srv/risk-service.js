@@ -15,7 +15,6 @@ module.exports = cds.service.impl(async function() {
                 risk.criticality = 2;
             }
 
-            // set criticality for priority
             switch (risk.prio_code) {
                 case 'H':
                     risk.PrioCriticality = 1;
@@ -34,17 +33,15 @@ module.exports = cds.service.impl(async function() {
     })
 
     this.on('getItems', async (req) => {
-        console.log('HERE')
-        const { exactQuantity } = req.data;
-        const query = SELECT.from(Items).where({ quantity: exactQuantity });
+        const { quantity } = req.data;
+
+        const query = SELECT.from(Items).where({ quantity: quantity });
         const items = await cds.run(query);
 
         return items;
     })
 
     this.on('createItem', async (req) => {
-        console.log('HERE')
-
         const { title, descr, quantity } = req.data;
 
         const newItem = {
@@ -53,10 +50,29 @@ module.exports = cds.service.impl(async function() {
             quantity,
         };
 
-        const query = INSERT.into(Items).entries(newItem)
+        try {
+        const query = INSERT.into(Items).entries(newItem);
+        await cds.run(query);
 
-        const result = await cds.run(query);
+        const getCreatedItemQuery = SELECT.one.from(Items).where({ title: title, descr: descr }).orderBy({ ID: 'desc' })
+        const createdItem = await cds.run(getCreatedItemQuery);
 
-        return result;
+        return createdItem;
+    } catch (e) {
+        console.log('An error occured on createItem action');
+
+        throw e;
+    }
     });
+
+    this.before('createItem', (req) => {
+        const { quantity } = req.data;
+
+        if (quantity > 100) req.error("Quantity can't exceed 100")
+    })
+
+    this.on('error', (e, req) => {
+        console.log(e.message || 'On error handler invoked')
+        console.log('\x1b[36m%s\x1b[0m', 'Hayah', JSON.stringify(req.data))
+    })
   });

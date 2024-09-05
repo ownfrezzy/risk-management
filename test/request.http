@@ -1,8 +1,8 @@
 @server = http://localhost:4004
 
 ### ------------------------------------------------------------------------
-# Custom function getItems
-GET {{server}}/odata/v4/service/risk/getItems?exactQuantity=10
+# Custom Function getItems
+GET {{server}}/odata/v4/service/risk/getItems(quantity=100)
 Content-Type: application/json
 
 ### ------------------------------------------------------------------------
@@ -11,12 +11,13 @@ POST {{server}}/odata/v4/service/risk/createItem
 Content-Type: application/json
 
 {
-    "title": "Item",
-    "descr": "Cool item",
-    "quantity": 10
+    "title": "Very Big Elephant and Hippo",
+    "descr": "Test being tested",
+    "quantity": 99
 }
 
 ### ------------------------------------------------------------------------
 # Get metadata
 GET {{server}}/odata/v4/service/risk/$metadata?sap-language=6N
 Content-Type: application/json
+

@@ -10,6 +10,6 @@ service RiskService {
 
     entity Items as projection on rm.Items;
 
-    function getItems(exactQuantity: Integer) returns Array of Items;
+    function getItems(quantity: Integer) returns Array of Items;
     action createItem(title: String, descr: String, quantity: Integer) returns Items;
 }

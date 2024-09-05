@@ -12,6 +12,7 @@
         "database": "db.sqlite",
         "name": "sqlite"
       }
-    ]
+    ],
+    "sqltools.useNodeRuntime": true
   }
   
