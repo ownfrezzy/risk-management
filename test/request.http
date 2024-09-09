@@ -21,3 +21,7 @@ Content-Type: application/json
 GET {{server}}/odata/v4/service/risk/$metadata?sap-language=6N
 Content-Type: application/json
 
+### ------------------------------------------------------------------------
+# Custom Function callLocalhost
+GET {{server}}/odata/v4/service/risk/callLocalhost()
+Content-Type: application/json

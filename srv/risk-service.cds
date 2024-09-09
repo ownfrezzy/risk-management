@@ -14,4 +14,6 @@ service RiskService {
 
     function getItems(quantity: Integer) returns Array of Items;
     action createItem(title: String, descr: String, quantity: Integer) returns Items;
+
+    function callLocalhost() returns String;
 }

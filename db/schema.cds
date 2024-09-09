@@ -1,5 +1,5 @@
 namespace riskmanagement;
-using { API_BUSINESS_PARTNER as external } from '../srv/external/API_BUSINESS_PARTNER.csn';
+using { API_BUSINESS_PARTNER as external } from '../srv/external/API_BUSINESS_PARTNER';
 
 
 using {

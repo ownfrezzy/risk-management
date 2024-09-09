@@ -1,7 +1,12 @@
 
 const cds = require('@sap/cds')
+const { executeHttpRequest } = require('@sap-cloud-sdk/http-client');
+const { destinationForServiceBinding } = require('@sap-cloud-sdk/connectivity');
+
 
 module.exports = cds.service.impl(async function() {
+
+    const destination = await cds.connect.to('MY_ON_PREM_SERVICE');
 
     const { Risks, BusinessPartners, Items } = this.entities;
     const BPsrv = await cds.connect.to("API_BUSINESS_PARTNER");
@@ -129,4 +134,20 @@ module.exports = cds.service.impl(async function() {
             },
         });
     });
+
+    this.on('callLocalhost', async () => {
+        try {
+            // const response = await executeHttpRequest({ destinationName: 'MyLocalServer1' }, {
+            //   method: 'GET',
+            //   url: '/',
+            // });
+
+            const response = await destination.get('/');
+      
+            return response.data;
+        } catch (error) {
+          console.error('Error calling local server:', error);
+          throw new Error('Failed to reach local server');
+        }
+      });
   });
