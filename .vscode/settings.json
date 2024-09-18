@@ -13,6 +13,7 @@
         "name": "sqlite"
       }
     ],
-    "sqltools.useNodeRuntime": true
+    "sqltools.useNodeRuntime": true,
+    "SAP HANA Project Explorer.bind.confirm automatic undeployment": false
   }
   

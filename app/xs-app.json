@@ -1,0 +1,34 @@
+{
+  "welcomeFile": "app/launchpad.html",
+  "routes": [
+    {
+      "source": "^/getNorthwind/(.*)$",
+      "target": "/$1",
+      "destination": "northwind_odata",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/app/(.*)$",
+      "target": "$1",
+      "localDir": ".",
+      "cacheControl": "no-cache, no-store, must-revalidate"
+    },
+    {
+      "source": "^/appconfig/",
+      "localDir": ".",
+      "cacheControl": "no-cache, no-store, must-revalidate"
+    },
+    {
+      "source": "^/(.*)$",
+      "target": "$1",
+      "destination": "srv-api",
+      "csrfProtection": true
+    },
+    {
+      "source":"^/odata/(.*)$",
+      "target": "$1",
+      "destination": "srv-api",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

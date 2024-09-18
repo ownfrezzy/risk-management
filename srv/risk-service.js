@@ -1,13 +1,8 @@
 
 const cds = require('@sap/cds')
 const { executeHttpRequest } = require('@sap-cloud-sdk/http-client');
-const { destinationForServiceBinding } = require('@sap-cloud-sdk/connectivity');
-
 
 module.exports = cds.service.impl(async function() {
-
-    const destination = await cds.connect.to('MY_ON_PREM_SERVICE');
-
     const { Risks, BusinessPartners, Items } = this.entities;
     const BPsrv = await cds.connect.to("API_BUSINESS_PARTNER");
 
@@ -65,7 +60,7 @@ module.exports = cds.service.impl(async function() {
         const busienssPartners = await BPsrv.transaction(req).send({
             query: SELECT.from(this.entities.BusinessPartners).where({ BusinessPartner: bpIDs }),
             headers: {
-                apikey: process.env.apikey,
+                apikey: 'elbpliqgZibHHuGTkGKOZcGyklrk8tRH',
             }
         });
 
@@ -119,11 +114,6 @@ module.exports = cds.service.impl(async function() {
         if (quantity > 100) req.error("Quantity can't exceed 100")
     })
 
-    this.on('error', (e, req) => {
-        console.log(e.message || 'On error handler invoked')
-        console.log('\x1b[36m%s\x1b[0m', 'Hayah', JSON.stringify(req.data))
-    })
-
     this.on("READ", BusinessPartners, async (req) => {
         req.query.where("LastName <> '' and FirstName <> '' ");
 
@@ -137,12 +127,12 @@ module.exports = cds.service.impl(async function() {
 
     this.on('callLocalhost', async () => {
         try {
-            // const response = await executeHttpRequest({ destinationName: 'MyLocalServer1' }, {
-            //   method: 'GET',
-            //   url: '/',
-            // });
+            const response = await executeHttpRequest({ destinationName: 'MyLocalServer1' }, {
+              method: 'GET',
+              url: '/',
+            });
 
-            const response = await destination.get('/');
+            // const response = await destination.get('/');
       
             return response.data;
         } catch (error) {
@@ -150,4 +140,9 @@ module.exports = cds.service.impl(async function() {
           throw new Error('Failed to reach local server');
         }
       });
+
+    this.on('error', (e, req) => {
+        console.log(e.message || 'On error handler invoked')
+        console.log('\x1b[36m%s\x1b[0m', 'Hayah', JSON.stringify(req.data))
+    })
   });
