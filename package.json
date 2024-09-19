@@ -10,7 +10,7 @@
     "@sap-cloud-sdk/resilience": "3.12.0",
     "@sap/cds": "8.2.0",
     "@sap/cds-dk": "7.6.0",
-    "@sap/xsenv": "^5.2.0",
+    "@sap/xsenv": "^5.3.0",
     "@sap/xssec": "^4",
     "express": "^4",
     "passport": "^0.7.0",
