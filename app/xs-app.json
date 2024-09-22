@@ -2,10 +2,10 @@
   "welcomeFile": "app/launchpad.html",
   "routes": [
     {
-      "source": "^/getNorthwind/(.*)$",
+      "source": "^/getOnPrem/(.*)$",
       "target": "/$1",
-      "destination": "northwind_odata",
-      "authenticationType": "none"
+      "destination": "MyLocalServer1",
+      "authenticationType": "xsuaa"
     },
     {
       "source": "^/app/(.*)$",

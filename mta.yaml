@@ -30,6 +30,7 @@ modules:
       - name: risk-management-auth
       - name: risk-management-destination
       - name: risk-management-db
+      - name: risk-magagement-connectivity
 
   - name: risk-management
     type: approuter.nodejs
@@ -46,6 +47,10 @@ modules:
           url: 'https://services.odata.org/V2/Northwind/Northwind.svc/'
           forwardAuthToken: false
           authentication: 'NoAuthentication'
+        - name: MyLocalServer1
+          url: 'localhost:3000/'
+          forwardAuthToken: false
+          authentication: 'BasicAuthentication'  
     requires:
       - name: srv-api
         group: destinations
@@ -55,6 +60,7 @@ modules:
           forwardAuthToken: true
       - name: risk-management-auth
       - name: risk-management-destination
+      - name: risk-magagement-connectivity
 
   - name: risk-management-db-deployer
     type: hdb
@@ -98,3 +104,9 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+
+  - name: risk-magagement-connectivity    
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite

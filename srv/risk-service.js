@@ -127,14 +127,11 @@ module.exports = cds.service.impl(async function() {
 
     this.on('callLocalhost', async () => {
         try {
-            const response = await executeHttpRequest({ destinationName: 'MyLocalServer1' }, {
-              method: 'GET',
-              url: '/',
-            });
+            const externalService = await cds.connect.to('MY_ON_PREM_SERVICE');
 
-            // const response = await destination.get('/');
+            const response = await externalService.get('/');
       
-            return response.data;
+            return response;
         } catch (error) {
           console.error('Error calling local server:', error);
           throw new Error('Failed to reach local server');
